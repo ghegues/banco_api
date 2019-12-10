@@ -1,0 +1,9 @@
+MeuRepository/obj
+MeuGesto.Domain/obj
+MeuGesto/obj/
+.vs/
+MeuRepository/.vs/
+MeuGesto.Domain/.vs/
+MeuRepository/.vs/
+MeuRepository/bin/
+MeuGesto/bin/

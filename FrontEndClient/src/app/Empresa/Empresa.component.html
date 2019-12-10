@@ -1,0 +1,43 @@
+<div class="card mt-4">
+  <h4 class="card-header">Admin</h4>
+  <div class="card-body col-md-12">
+    <h4>Cadastrar empresa</h4>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="nomeFantasia">Nome</label>
+        <input type="text" formControlName="nomeFantasia" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.nomeFantasia.errors }" />
+        <div *ngIf="submitted && f.nomeFantasia.errors" class="invalid-feedback">
+          <div *ngIf="f.nomeFantasia.errors.required">Nome é obrigatório</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="razaoSocial">Razão Social</label>
+        <input type="text" formControlName="razaoSocial" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.razaoSocial.errors }" />
+        <div *ngIf="submitted && f.razaoSocial.errors" class="invalid-feedback">
+          <div *ngIf="f.razaoSocial.errors.required">Razão Social é obrigatório</div>
+        </div>
+      </div>
+      <button class="btn btn-primary col-md-2">     
+        Cadastrar
+    </button> 
+    </form>
+  </div>
+</div>
+<table class="table" *ngIf="Empresas">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Nome</th>
+      <th scope="col">Razão Social</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let empresa of Empresas">
+      <td scope="row">{{empresa.id}}</td>
+      <td>{{empresa.nomeFantasia}}</td>
+      <td>{{empresa.razaoSocial}}</td>
+    </tr>
+  </tbody>
+</table>

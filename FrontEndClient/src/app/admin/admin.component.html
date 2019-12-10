@@ -1,0 +1,70 @@
+﻿<div class="card mt-4">
+    <h4 class="card-header">Admin</h4>
+    <div class="card-body col-md-4">
+        <h4>Cadastrar usuário</h4>
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="FirstName">Nome</label>
+                <input type="text" formControlName="FirstName" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.FirstName.errors }" />
+                <div *ngIf="submitted && f.FirstName.errors" class="invalid-feedback">
+                    <div *ngIf="f.FirstName.errors.required">Nome é obrigatório</div>
+                </div>
+                <label for="LastName">Sobrenome</label>
+                <input type="text" formControlName="LastName" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.LastName.errors }" />
+                <div *ngIf="submitted && f.LastName.errors" class="invalid-feedback">
+                    <div *ngIf="f.LastName.errors.required">Sobrenome</div>
+                </div>
+                <label for="Username">Usuário</label>
+                <input type="text" formControlName="Username" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.Username.errors }" />
+                <div *ngIf="submitted && f.Username.errors" class="invalid-feedback">
+                    <div *ngIf="f.Username.errors.required">Username is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Password">Senha</label>
+                <input type="Password" formControlName="Password" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.Password.errors }" />
+                <div *ngIf="submitted && f.Password.errors" class="invalid-feedback">
+                    <div *ngIf="f.Password.errors.required">Password is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Role">Permissão</label>
+                <select formControlName="Role" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.Role.errors }">
+                    <option disabled>Escolher...</option>
+                    <option *ngFor="let item of States | keyvalue" [value]="item.value">
+                        {{ item.value}}
+                    </option>
+                </select>
+
+
+
+                <div *ngIf="submitted && f.Role.errors" class="invalid-feedback">
+                    <div *ngIf="f.Role.errors.required">Password is required</div>
+                </div>
+            </div>
+            <button [disabled]="loading" class="btn btn-primary">
+                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                Cadastrar
+            </button>
+            <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+            <div *ngIf="cadastro_realizado == true">Cadastro realizado com sucesso.</div>
+        </form>
+    </div>
+    <hr>
+    <div class="card-body">
+        <p>This page can be accessed <u>only by administrators</u>.</p>
+        <p class="mb-1">Usuários cadastrados</p>
+        <div *ngIf="loading" class="spinner-border spinner-border-sm"></div>
+        <ul *ngIf="users">
+            <li *ngFor="let user of users">
+                <p>{{user.firstName}} {{user.lastName}} <button class="btn btn-danger" (click)="apagarUsuario(user.id)"><i class="fa fa-trash"
+                            aria-hidden="true"></i></button> </p>
+            </li>
+        </ul>
+    </div>
+</div>

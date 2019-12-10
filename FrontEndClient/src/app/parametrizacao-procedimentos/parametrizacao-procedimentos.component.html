@@ -1,0 +1,32 @@
+<form [formGroup]="ProcedimentoForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="Procedimento">Procedimento</label>
+    <input type="text" formControlName="Procedimento" class="form-control col-md-5"
+      [ngClass]="{ 'is-invalid': submitted && f.Procedimento.errors }" />
+    <div *ngIf="submitted && f.Procedimento.errors" class="invalid-feedback">
+      <div *ngIf="f.Procedimento.errors.required">Procedimento é obrigatório</div>
+    </div>    
+  </div> 
+  <div class="form-group">
+  <button class="btn btn-primary col-md-2">     
+      Cadastrar
+  </button> 
+  </div>
+</form>
+
+<table class="table" *ngIf="Procedimentos">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Desc Procedimento</th>
+      <th scope="col">Opç</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let procedimento of Procedimentos">
+      <td scope="row">{{procedimento.id}}</td>
+      <td>{{procedimento.descricao}}</td>
+      <td><button class="btn btn-primary" (click)="redefinirProcedimentoByName(procedimento.descricao)"><i class="fa fa-unlock" aria-hidden="true"></i></button></td>
+    </tr>
+  </tbody>
+</table>

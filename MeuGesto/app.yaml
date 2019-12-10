@@ -1,0 +1,3 @@
+service: banco-api
+runtime: custom
+env: flex
